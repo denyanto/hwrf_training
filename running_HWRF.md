@@ -213,4 +213,26 @@ cs=ax.contourf(lon,lat,ws,cmap= 'Blues', transform=ccrs.PlateCarree())
 plt.colorbar(cs,orientation='horizontal')
 plt.show()
 ```
+Example of ploting track of hwrf output using python script
+```console
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
+import pandas as pd
+
+ds=pd.read_csv('hifreq_d03.htcf', header=None)
+lo=[]
+la=[]
+for i in range(len(ds[2])):
+	la.append(-1*float(ds[2][i][:-1]))
+	lo.append(float(ds[3][i][:-1]))
+lo=np.array(lo)
+la=np.array(la)
+
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.coastlines()
+ax.set_extent([lon[0,0], lon[0,-1], lat[0,0], lat[-1,0]])
+ax.gridlines(draw_labels=True,color='black',alpha=0.5,linestyle='--')
+pl.plot(lo,la,'o-')
+plt.show()
+```
 ## Finish
