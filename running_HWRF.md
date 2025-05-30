@@ -230,7 +230,7 @@ la=np.array(la)
 
 ax = plt.axes(projection=ccrs.PlateCarree())
 ax.coastlines()
-ax.set_extent([lon[0,0], lon[0,-1], lat[0,0], lat[-1,0]])
+ax.set_extent([100, 130, -20, -5])
 ax.gridlines(draw_labels=True,color='black',alpha=0.5,linestyle='--')
 pl.plot(lo,la,'o-')
 plt.show()
