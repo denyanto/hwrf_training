@@ -80,7 +80,6 @@ $ nano namelist.input
  start_hour                          = 00,       00, 00,
  start_minute                        = 00,       00, 00,
  start_second                        = 00,       00, 00,
- tstart                              = 00,       
  end_year                            = 2021,     2021, 2021,
  end_month                           = 04,       04, 04,
  end_day                             = 13,       13, 13,
