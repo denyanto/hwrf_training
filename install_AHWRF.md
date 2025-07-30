@@ -1,10 +1,12 @@
 # AHWRF Configure on HPC
-Configuration of ARW HWRF on HPC
+Configuration of ARW HWRF (AHWRF) on HPC
+
 These are some installation notes taken in the process of installing AHWRF. This tutorial is for **free**
 
 ## Module load and edit path
 
 ```console
+cd $HOME
 vi .bashrc
 ```
 Edit in the .bashrc file
