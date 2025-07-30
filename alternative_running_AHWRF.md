@@ -236,12 +236,16 @@ plt.colorbar(cs,orientation='horizontal')
 plt.show()
 ```
 Example of ploting track of hwrf output using python script
+
+```
+$ grep ATCF rsl.out.0000 > hifreq.txt
+```
 ```console
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 import pandas as pd
 
-ds=pd.read_csv('hifreq_d03.htcf', header=None)
+ds=pd.read_csv('hifreq.txt', header=None)
 lo=[]
 la=[]
 for i in range(len(ds[2])):
