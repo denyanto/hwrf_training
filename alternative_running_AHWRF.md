@@ -238,19 +238,21 @@ plt.show()
 Example of ploting track of hwrf output using python script
 
 ```
-$ grep ATCF rsl.out.0000 > hifreq.txt
+$ grep ATCF rsl.out.0000 > htrack.txt
 ```
 ```console
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
-ds=pd.read_csv('hifreq.txt', header=None)
+ds=pd.read_csv('/opt/media-ext1/hwrf/hwrf3/seroja2/htrack.txt', header=None)
 lo=[]
 la=[]
-for i in range(len(ds[2])):
-	la.append(-1*float(ds[2][i][:-1]))
-	lo.append(float(ds[3][i][:-1]))
+for i in range(len(ds)):
+    da=ds[0][i].split()
+    la.append(float(da[2]))
+    lo.append(float(da[3]))
 lo=np.array(lo)
 la=np.array(la)
 
@@ -258,7 +260,8 @@ ax = plt.axes(projection=ccrs.PlateCarree())
 ax.coastlines()
 ax.set_extent([100, 130, -20, -5])
 ax.gridlines(draw_labels=True,color='black',alpha=0.5,linestyle='--')
-pl.plot(lo,la,'o-')
-plt.show()
+plt.plot(lo,la,'o-')
+plt.savefig('track.png')
+
 ```
 ## Finish
