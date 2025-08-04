@@ -216,23 +216,24 @@ $ ncview wrfout_d01_2021-04-04_00:00:00
 ```
 Example of another visualization using python script
 ```console
-import netCDF4 as nc
+import xarray as xr
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
-import numpy as np
 
-fh=nc.Dataset('wrfout_d01_2021-04-04_06:00:00')
-lat=fh.variables['HLAT'][0]
-lon=fh.variables['HLON'][0]
-u10=fh.variables['U10'][0]
-v10=fh.variables['V10'][0]
-ws=np.sqrt(u10*u10+v10*v10)
+ds=xr.open_dataset('/opt/media-ext1/hwrf/hwrf3/seroja2/wrfout_d03_2021-04-04_00:00:00')
+press=ds['PSFC']
+psfc=press.values
+lat=press.XLAT.values
+lon=press.XLONG.values
+xti=press.XTIME.values
 ax = plt.axes(projection=ccrs.PlateCarree())
 ax.coastlines()
-ax.set_extent([lon[0,0], lon[0,-1], lat[0,0], lat[-1,0]])
+ax.set_extent([100, 130, -20, -5])
 ax.gridlines(draw_labels=True,color='black',alpha=0.5,linestyle='--')
-cs=ax.contourf(lon,lat,ws,cmap= 'Blues', transform=ccrs.PlateCarree())
+cs=ax.contourf(lon[100],lat[100],psfc[100]/100,cmap= 'viridis', transform=ccrs.PlateCarree())
+plt.title(str(xti[100])[:13]+' UTC');
 plt.colorbar(cs,orientation='horizontal')
+plt.savefig('maptrack.png')
 plt.show()
 ```
 Example of ploting track of hwrf output using python script
